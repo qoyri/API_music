@@ -4,10 +4,6 @@
 [![GitHub stars](https://img.shields.io/github/stars/username/repositoryname?style=for-the-badge)](https://github.com/username/repositoryname/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/username/repositoryname?style=for-the-badge)](https://github.com/username/repositoryname/network)
 
-<p align="center">
-  <img src="https://media.giphy.com/media/QBUMCsq5si3sAPwh78/giphy.gif" alt="Music Animation" width="600"/>
-</p>
-
 ---
 
 ##  **Description**
@@ -25,12 +21,6 @@ Elle offre :
 ---
 
 ##  **Aperçu de l'application**
-
-<p align="center">
-  <b>Page principale</b>
-  <br/>
-  <img src="https://media.giphy.com/media/KfEaOKJdU5xTMZ52Bp/giphy.gif" alt="Demo App Screenshot" width="700">
-</p>
 
 ---
 
@@ -113,9 +103,5 @@ Ce projet est sous la licence MIT – vous êtes libre de l'utiliser, de le modi
 ### ⭐ **Montrez votre support !**
 
 Si vous aimez ce projet, n’oubliez pas de mettre une **étoile⭐** sur le dépôt GitHub !
-
-<p align="center">
-  <img src="https://media.giphy.com/media/l41lIkMpTL6A8ks9K/giphy-downsized-large.gif" width="300" />
-</p>
 
 ---
