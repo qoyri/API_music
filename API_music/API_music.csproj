@@ -1,0 +1,56 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net8.0-windows</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <UseWPF>true</UseWPF>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <ApplicationIcon>732110.ico</ApplicationIcon>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="FontAwesome.Sharp" Version="6.6.0" />
+      <PackageReference Include="Jint" Version="4.1.0" />
+      <PackageReference Include="LottieSharp" Version="2.4.0" />
+      <PackageReference Include="MugenMvvmToolkit" Version="6.5.0" />
+      <PackageReference Include="NAudio" Version="2.2.1" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+      <PackageReference Include="WPF-UI" Version="4.0.0-rc.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Page Update="Styles\ButtonStyles.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+      <Page Update="Styles\UIColors.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Assets\girl_music.json" />
+      <EmbeddedResource Include="Assets\girl_music.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="Assets\loading.json" />
+      <EmbeddedResource Include="Assets\loading.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="Assets\visualizer.json" />
+      <EmbeddedResource Include="Assets\visualizer.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="Resources\images\clock.json" />
+      <None Remove="Resources\images\game_over.json" />
+      <None Remove="Resources\images\settings.json" />
+      <None Remove="Resources\images\sound.json" />
+      <None Remove="Resources\images\victory.json" />
+    </ItemGroup>
+
+</Project>

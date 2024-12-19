@@ -1,0 +1,2 @@
+C:\Users\qoyri\Nextcloud\Code\API_music\API_music\bin\Release\net8.0-windows\win-x64\publish\API_music.pdb
+C:\Users\qoyri\Nextcloud\Code\API_music\API_music\bin\Release\net8.0-windows\win-x64\publish\API_music.exe

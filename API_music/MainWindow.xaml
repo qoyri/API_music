@@ -1,0 +1,156 @@
+﻿<Window x:Class="MusicRecognitionApp.MainWindow"
+                                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                                     xmlns:lottie="clr-namespace:LottieSharp.WPF;assembly=LottieSharp"
+                                     Title="Music Recognition"
+                                     Height="700"
+                                     Width="1300"
+                                     Background="{StaticResource primaryBackColor2Brush}"
+                                     WindowStartupLocation="CenterScreen"
+                                     WindowStyle="None"
+                                     AllowsTransparency="True">
+                                 <Window.Resources>
+                                     <Storyboard x:Key="FadeInStoryboard">
+                                         <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                          From="0"
+                                                          To="1"
+                                                          Duration="0:0:1"/>
+                                     </Storyboard>
+                                     <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+                                     
+                                     <Style TargetType="ScrollBar">
+                                         <Setter Property="Foreground" Value="#0A013A" /> <!-- Couleur arrière-plan -->
+                                         <Setter Property="Background" Value="#00801780" /> <!-- Couleur principale -->
+                                         <Setter Property="Width" Value="2" /> <!-- Largeur de la ScrollBar -->
+                                         <Setter Property="Template">
+                                             <Setter.Value>
+                                                 <ControlTemplate TargetType="ScrollBar">
+                                                     <Grid>
+                                                         <Rectangle Fill="{TemplateBinding Background}" />
+                                                         <Track 
+                                                             Name="PART_Track" 
+                                                             IsDirectionReversed="False">
+                                                             <Track.DecreaseRepeatButton>
+                                                                 <RepeatButton Width="0" Height="0" />
+                                                             </Track.DecreaseRepeatButton>
+                                                             <Track.Thumb>
+                                                                 <Thumb Background="#0A013A" BorderBrush="#0A013A" BorderThickness="0" Width="2"/>
+                                                             </Track.Thumb>
+                                                             <Track.IncreaseRepeatButton>
+                                                                 <RepeatButton Width="0" Height="0" />
+                                                             </Track.IncreaseRepeatButton>
+                                                         </Track>
+                                                     </Grid>
+                                                 </ControlTemplate>
+                                             </Setter.Value>
+                                         </Setter>
+                                     </Style>
+                                 </Window.Resources>
+                             
+                                 <Border CornerRadius="10" BorderBrush="Gray" BorderThickness="1" Background="{StaticResource primaryBackColor1Brush}">
+                                     <Grid>
+                                         <Grid.RowDefinitions>
+                                             <RowDefinition Height="Auto"/>
+                                             <RowDefinition Height="*"/>
+                                         </Grid.RowDefinitions>
+                             
+                                         <!-- Title Bar with Control Buttons -->
+                                         <Border CornerRadius="10,10,0,0" Grid.Row="0" Background="{StaticResource primaryBackColor1Brush}" BorderBrush="{StaticResource winBorderColor1Brush}" BorderThickness="1" MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+                                             <DockPanel>
+                                                 <TextBlock Text="Music Recognition" Foreground="{StaticResource titleColor1}" VerticalAlignment="Center" Margin="10" FontSize="16" DockPanel.Dock="Left"/>
+                                                 <DockPanel DockPanel.Dock="Right">
+                                                     <Button Content="✕" Width="40" Command="{Binding CloseCommand}" Style="{StaticResource windowControlButtonStyle}" Tag="{StaticResource plainTextColor1}" Margin="0,0,5,0" DockPanel.Dock="Right"/>
+                                                     <Button Content="-" Width="40" Command="{Binding MinimizeCommand}" Style="{StaticResource windowControlButtonStyle}" Tag="{StaticResource plainTextColor1}" Margin="0,0,5,0"/>
+                                                 </DockPanel>
+                                             </DockPanel>
+                                         </Border>
+                             
+                                         <Border CornerRadius="0,0,10,10" Grid.Row="1" Margin="5">
+                                             <Grid>
+                                                 <Grid.RowDefinitions>
+                                                     <RowDefinition Height="*"/>
+                                                     <RowDefinition Height="*"/>
+                                                 </Grid.RowDefinitions>
+                                                 <Grid.ColumnDefinitions>
+                                                     <ColumnDefinition Width="*"/>
+                                                     <ColumnDefinition Width="*"/>
+                                                 </Grid.ColumnDefinitions>
+                             
+                                                 <!-- First Block - Lottie Animation 1 with Recording Button -->
+                                                 <Border Grid.Row="0" Grid.Column="0" Background="{StaticResource panelColor}" CornerRadius="10" BorderBrush="{StaticResource winBorderColor3Brush}" BorderThickness="1" Margin="10" Padding="10">
+                                                     <Grid>
+                                                         <lottie:LottieAnimationView
+                                                             x:Name="LottieAnimation1"
+                                                             Width="200"
+                                                             Height="200"
+                                                             AutoPlay="True"
+                                                             HorizontalAlignment="Center"
+                                                             VerticalAlignment="Center"
+                                                             RepeatCount="-1" />
+                                                         
+                                                         <!-- Recording Button -->
+                                                         <Button Content="Start Recording"
+                                                                 Style="{StaticResource windowControlButtonStyle}"
+                                                                 Margin="0,10,0,0"
+                                                                 VerticalAlignment="Bottom"
+                                                                 HorizontalAlignment="Center"
+                                                                 Command="{Binding CaptureCommand}" />
+                                                     </Grid>
+                                                 </Border>
+                             
+                                                 <!-- Third Block - History -->
+                                                 <Border Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Background="{StaticResource panelColor}" CornerRadius="10" BorderBrush="{StaticResource winBorderColor3Brush}" BorderThickness="1" Margin="10" Padding="10">
+                                                     <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                                         <ItemsControl ItemsSource="{Binding SearchHistory}">
+                                                             <ItemsControl.ItemTemplate>
+                                                                 <DataTemplate>
+                                                                     <Grid Margin="5">
+                                                                         <Grid.ColumnDefinitions>
+                                                                             <ColumnDefinition Width="*"/>
+                                                                             <ColumnDefinition Width="Auto"/>
+                                                                         </Grid.ColumnDefinitions>
+                                                                         <TextBlock Text="{Binding Name}" Foreground="LightBlue" FontWeight="Bold" FontSize="16" VerticalAlignment="Center" />
+                                                                         <Button Content="Open in Spotify"
+                                                                             Style="{StaticResource windowControlButtonStyle}"
+                                                                             Command="{Binding DataContext.OpenSpotifyLinkCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                                             CommandParameter="{Binding Link}"
+                                                                             Grid.Column="1"
+                                                                             Margin="5,0,0,0" />
+                                                                     </Grid>
+                                                                 </DataTemplate>
+                                                             </ItemsControl.ItemTemplate>
+                                                         </ItemsControl>
+                                                     </ScrollViewer>
+                                                 </Border>
+                             
+                                                 <!-- Second Block - Lottie Animation or Search Results -->
+                                                 <Border Grid.Row="1" Grid.Column="0" Background="{StaticResource panelColor}" CornerRadius="10" BorderBrush="{StaticResource winBorderColor3Brush}" BorderThickness="1" Margin="10" Padding="10">
+                                                                         <Grid>
+                                                                             <Grid.ColumnDefinitions>
+                                                                                 <ColumnDefinition Width="Auto" />
+                                                                                 <ColumnDefinition Width="*" />
+                                                                             </Grid.ColumnDefinitions>
+                                                                             <!-- Image at Left -->
+                                                                             <Image Source="{Binding Strings.AlbumImageUrl, FallbackValue=https://static.vecteezy.com/system/resources/previews/023/986/494/non_2x/spotify-logo-spotify-logo-transparent-spotify-icon-transparent-free-free-png.png}"
+                                                                                    Stretch="Uniform"
+                                                                                    Width="250"
+                                                                                    Height="250"
+                                                                                    HorizontalAlignment="Left" Margin="10"/>
+                                                                             <!-- Details + Button At Right -->
+                                                                             <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+                                                                                 <TextBlock Text="{Binding Strings.SongTitle}" Foreground="LightBlue" FontWeight="Bold" FontSize="16" />
+                                                                                 <TextBlock Text="{Binding Strings.Artist}" Foreground="LightPink" FontSize="14" Margin="0,5,0,10" />
+                                                                                 <Button Content="Open With Spotify"
+                                                                                         Command="{Binding OpenSpotifyLinkCommand}"
+                                                                                         CommandParameter="{Binding Strings.SpotifyLink}"
+                                                                                         Visibility="{Binding HasAlbumImage, Converter={StaticResource BoolToVisibilityConverter}}"
+                                                                                         Style="{StaticResource windowControlButtonStyle}"
+                                                                                         HorizontalAlignment="Left" />
+                                                                             </StackPanel>
+                                                                         </Grid>
+                                                                     </Border>
+                                             </Grid>
+                                         </Border>
+                                     </Grid>
+                                 </Border>
+                             </Window>
